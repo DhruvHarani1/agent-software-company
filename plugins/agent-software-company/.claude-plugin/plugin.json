@@ -1,0 +1,10 @@
+{
+  "name": "agent-software-company",
+  "version": "1.2.0",
+  "description": "Run a software product like a small company of Claude Code sessions: Boss, area managers, QA, security, testers; safe branches and data protocol; terse token-saving style; automatic discovery so several teams (or your second Claude account) can work on one GitHub repository.",
+  "author": { "name": "DhruvHarani1" },
+  "homepage": "https://github.com/DhruvHarani1/agent-software-company",
+  "repository": "https://github.com/DhruvHarani1/agent-software-company",
+  "license": "MIT",
+  "keywords": ["agents", "multi-agent", "sdlc", "code-review", "workflow", "collaboration"]
+}

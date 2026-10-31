@@ -1,0 +1,14 @@
+{
+  "name": "agent-company",
+  "owner": { "name": "DhruvHarani1" },
+  "metadata": { "description": "Skills for running software projects with teams of Claude Code agents." },
+  "plugins": [
+    {
+      "name": "agent-software-company",
+      "source": "./plugins/agent-software-company",
+      "description": "Boss/manager/QA/security/tester agent company with safe delivery, terse mode and automatic multi-team discovery.",
+      "version": "1.2.0",
+      "category": "workflow"
+    }
+  ]
+}

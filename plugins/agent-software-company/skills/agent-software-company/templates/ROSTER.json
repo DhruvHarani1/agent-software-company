@@ -1,0 +1,25 @@
+{
+  "protocol": "AAP v1",
+  "orgs": [
+    {
+      "org": "org-a",
+      "owner_github": "OWNER_LOGIN_A",
+      "role": "repository owner",
+      "agents": [
+        { "name": "boss-a", "role": "boss", "areas": ["*"] },
+        { "name": "manager-money-a", "role": "manager", "areas": ["area:money"] },
+        { "name": "qa-a", "role": "qa-reviewer", "areas": [] },
+        { "name": "security-a", "role": "security", "areas": ["area:security"] }
+      ]
+    },
+    {
+      "org": "org-b",
+      "owner_github": "OWNER_LOGIN_B",
+      "role": "collaborator",
+      "agents": [
+        { "name": "boss-b", "role": "boss", "areas": ["area:docs"] },
+        { "name": "qa-b", "role": "qa-reviewer", "areas": [] }
+      ]
+    }
+  ]
+}

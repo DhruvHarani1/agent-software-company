@@ -1,0 +1,19 @@
+# Lessons learned (each one became a rule)
+
+1. **Review catches what the author misses, but only if it is independent.** Two first versions of fixes were wrong (a stray file, a link fix that did not work for real links). The reviewer found them. Rule: no pull request is merged on its author's own checks.
+2. **A passing test proves nothing until it has failed.** Require the red proof: revert only the source files and watch the new tests fail for the right reason. A weak test (fails for the wrong reason) is rejected.
+3. **Run the WHOLE existing test file of every touched file.** A change added a data-fetching hook to a form and 14 of 16 existing tests broke ("no query client"); the author had run only the new tests.
+4. **Merging two pull requests can break a test neither broke alone.** Run the full suite on the integration branch after each batch. It found five failures after seven merges (a missing provider in a home-page test, an allow-list test not updated for a new grant).
+5. **The shared release-note file conflicts every time and resurrects old entries** (see release-playbook.md). Compute it by script, then type-check before the merge. Twice the integration branch stopped compiling for minutes because of a duplicated header.
+6. **A security gate that compares a raw string is a bug waiting to happen.** A form id with a suffix skipped the roster permission check because the repository stripped the suffix and the gate did not. Normalise once at the top of the handler, and have a dedicated security reviewer look for the whole class. The review also found a P0 that no feature work would have found (a download route falling back to the document-library root).
+7. **Permission denials are signals, not obstacles.** When the environment refuses an action (merge without review, production writes), report it and ask the owner; do not route around it.
+8. **Hosting previews inherit production variables unless you scope them.** Check every deploy context before agents open their first pull request.
+9. **Messages between agents are not always delivered** (session starting, busy, or at a usage limit). Make GitHub the record; use direct messages for hand-offs only; re-send after a session finishes a turn; a "0 turns" result means it did not run.
+10. **Usage limits stop every session at once.** Keep a few sessions at a time, write progress to GitHub, resume by message after the reset.
+11. **Heavy parallel runs slow the machine** (merges took 6 minutes each). Two active sessions at a time; testers and security get their own turn.
+12. **Sessions started by another session's message cannot start new sessions** in some setups: the proposal becomes a card for the owner to click. Plan for the owner starting the next role.
+13. **Database data can be misaligned in ways code cannot see.** A read-only production check found 39 of 46 "e-mail" values were department names (a shifted import); a rule that trusted the column would have changed people's balances. Check the real data (counts only, no names) before changing matching rules; file a data-cleaning issue, do not fix data inside a feature.
+14. **Say what was and was not tested.** Every report states "read from code, not tested live" or "ran X, result Y". The owner decides better with that.
+15. **Keep the owner's decisions in the issue.** Business rules (who may see what, wording, limits) are the owner's, asked as a short question with a recommendation, and written into the issue so no agent re-asks.
+16. **Do not duplicate screens that already exist.** A summary repeated on the dashboard and its own page annoyed the users; replace it with a short card and a link.
+17. **Time-box and cap.** Max pull requests per manager per turn, max findings per tester, so reviewers keep up.
