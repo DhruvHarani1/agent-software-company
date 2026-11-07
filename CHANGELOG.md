@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.0 (7 Nov 2026)
+- **Adaptive organisation:** `references/adaptive-org.md` (profile the project, presets for solo tool / internal app / public SaaS / library / mobile / data-ML / regulated, role catalog with the trigger for each role, e.g. marketing only for external products, Boss decision rights decide / inform / ask, monthly self-adjusting loop, decision log). New `scripts/org_profile.py` guesses the profile from the repo (read-only).
+- SKILL.md: designing the company is now the first step on any project; the skill is product-neutral.
+- Executive layer pattern (CTO, COO, CPO, CISO, CDO, CCO, cost and usage) with charters and a weekly owner report, as an optional layer of `org-structure.md`.
+
 ## 1.3.0 (7 Nov 2026)
 - **Organisation reform:** new `references/org-structure.md` (departments, hats versus headcount, flow, cadence, RACI, lazy staffing, role brief template). Roster may carry `department`.
 - Lessons 18-24: stacked pull request pitfall, clock time bombs, changed-tests-per-PR routine, unprompted cleanup after every merge, bulk data change as a class, honest error messages, departments.

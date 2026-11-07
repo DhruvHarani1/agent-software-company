@@ -42,3 +42,6 @@ Business rule: owner A, product R. Design and build: Boss A, engineering R. Code
 
 ## Roster
 Record each agent in `.agents/ROSTER.json` with `role` and `areas` (add `department`). Departments are labels; they do not change who may merge or approve.
+
+## Executive layer (optional, for wide products)
+A C-suite of hats under the Boss, each owning ONE outcome and reporting weekly: CTO (architecture, dependencies, test speed), COO (flow, backlog hygiene, cleanup, cadence), CPO (roadmap and requirements), CISO (access, secrets, backups), CDO (data quality), CCO (communications and support), plus cost and usage. Add CMO/growth only for external products and developer relations only for libraries; see `adaptive-org.md` for triggers. Each gets a charter (purpose, outputs, first 30 days, rules) in the repo, then a session only when its queue justifies it.

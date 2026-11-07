@@ -3,9 +3,13 @@ name: agent-software-company
 description: Run a software product like a small company made of Claude Code sessions (Boss/CEO, area managers with sub-agents, independent QA reviewer, security reviewer, functional testers) with branches agent > staging > main, an SDLC with sprints and turn-taking, a strict production-data safety protocol, a terse token-saving style, and an interop protocol so several teams (you and a friend, each with your own Claude) can work together on one GitHub repository without colliding. Use when you want AI agents to find bugs, fix them, review each other and ship releases to a real product safely, alone or with another team's agents.
 ---
 
-# Agent software company (v1.3.0)
+# Agent software company (v1.4.0)
 
-Playbook proven on a live web app (Next.js, Supabase, Excel mirror): 40+ pull requests, 4 releases, one security hotfix, no production data touched by an agent. Only GitHub issues, pull requests and Claude Code sessions: no extra service.
+Playbook proven on a live web app (an internal business portal): 240+ pull requests, 25 releases, security hotfixes, no production data touched by an agent. Written to be product-neutral: internal or external, any stack, any repository. Only GitHub issues, pull requests and Claude Code sessions: no extra service.
+
+## First step on ANY project: design the company for it
+
+This skill fits an internal script, a staff portal, a public SaaS, a library or a mobile app. Before the first sprint the Boss runs `python scripts/org_profile.py <repo>`, answers the profile questions, picks the nearest preset and writes `docs/team/PROFILE.md`, then composes roles from the catalog (marketing or developer relations only for external products; compliance only when regulated; and so on) and keeps tuning the org monthly. The Boss decides process and org on its own and informs the owner; the owner decides business rules, money, who-sees-what, production data and anything sent to real people. Details: `references/adaptive-org.md`.
 
 ## The picture
 
@@ -70,6 +74,7 @@ Production is read-only for agents. Data change = encrypted backup, dry run, wri
 
 ## Reference files
 
+- `references/adaptive-org.md`: profile the project, presets, role catalog with triggers, Boss decision rights (decide / inform / ask), monthly self-adjusting loop, decision log.
 - `references/org-structure.md`: departments (PMO, Product & Research, Engineering squads, QA, Security, DevOps & Release, Data, Support & Docs), hats vs headcount, flow, cadence, RACI, lazy staffing.
 - `references/roles-and-briefs.md`: role definitions and copy-paste briefs.
 - `references/sdlc-and-sprints.md`: phases, gates, ceremonies, turn-taking, priorities, metrics, rollout order.

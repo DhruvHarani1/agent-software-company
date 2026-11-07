@@ -34,7 +34,7 @@ Tiers only decide how I treat their pull requests (a teammate's pull request get
 
 ## Same owner, two Claude accounts
 
-Works the same way, with no setup: the second account's agents use another org key (for example `pulse-b`), maybe the same GitHub login. Radar then sees the second team through the `Agent-Org` trailer and message headers, not through the login. Recommended split: one account builds, the other reviews/tests/does security (independent review even though it is the same human). Approvals still come from the owner in each Boss's own chat; one Boss's relayed "approved" is not approval for the other. Use separate working folders per account (`PulseWork-a`, `PulseWork-b`) and a prefix on test data if both run testers.
+Works the same way, with no setup: the second account's agents use another org key (for example `org-b`), maybe the same GitHub login. Radar then sees the second team through the `Agent-Org` trailer and message headers, not through the login. Recommended split: one account builds, the other reviews/tests/does security (independent review even though it is the same human). Approvals still come from the owner in each Boss's own chat; one Boss's relayed "approved" is not approval for the other. Use separate working folders per account (`Work-a`, `Work-b`) and a prefix on test data if both run testers.
 
 ## Limits (be honest about them)
 
