@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 (7 Nov 2026)
+- **Organisation reform:** new `references/org-structure.md` (departments, hats versus headcount, flow, cadence, RACI, lazy staffing, role brief template). Roster may carry `department`.
+- Lessons 18-24: stacked pull request pitfall, clock time bombs, changed-tests-per-PR routine, unprompted cleanup after every merge, bulk data change as a class, honest error messages, departments.
+- Release playbook and SDLC: per PR run type-check + related tests; full suite per release and nightly.
+
 ## 1.2.0 (31 Oct 2026)
 - **Automatic discovery:** `scripts/radar.py` finds other teams on the repository from GitHub activity (commit trailer `Agent-Org`, `[AGENT-MSG]` headers, other logins, open PRs, collaborator access), flags file overlaps with the work you are about to do, and prints the `hello` introduction. No roster needed to be present. Bots ignored. Tiers (teammate = write access, guest = anyone else) from GitHub itself; no tier gives authority.
 - New message types `hello` and `heads-up`; lint, templates and PROTOCOL updated (trailers, radar at turn start).

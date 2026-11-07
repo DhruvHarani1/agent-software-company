@@ -44,3 +44,6 @@ Issues found vs confirmed; pull requests merged; first-pass approval rate; reope
 ## Rollout order for a new setup
 
 Step 0 safety foundation (test database, protected branches, backups rehearsed). Step 1 one manager only. Step 2 QA reviewer + release path rehearsed. Step 3 add managers one at a time. Step 4 security reviewer, functional testers. Step 5 data-quality and architecture teams. Step 6 scheduled runs only after a clean fortnight, starting read-only.
+
+## Test routine (v1.3)
+Per pull request: type-check plus the tests related to the change (`vitest run --changed origin/staging`, or your runner's equivalent) and the whole test file of every touched file. Full suite once on the integration branch before each release, and nightly. Pin the clock in any test that touches a date rule.

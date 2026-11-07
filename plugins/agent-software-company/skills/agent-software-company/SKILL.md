@@ -3,7 +3,7 @@ name: agent-software-company
 description: Run a software product like a small company made of Claude Code sessions (Boss/CEO, area managers with sub-agents, independent QA reviewer, security reviewer, functional testers) with branches agent > staging > main, an SDLC with sprints and turn-taking, a strict production-data safety protocol, a terse token-saving style, and an interop protocol so several teams (you and a friend, each with your own Claude) can work together on one GitHub repository without colliding. Use when you want AI agents to find bugs, fix them, review each other and ship releases to a real product safely, alone or with another team's agents.
 ---
 
-# Agent software company (v1.2.0)
+# Agent software company (v1.3.0)
 
 Playbook proven on a live web app (Next.js, Supabase, Excel mirror): 40+ pull requests, 4 releases, one security hotfix, no production data touched by an agent. Only GitHub issues, pull requests and Claude Code sessions: no extra service.
 
@@ -19,6 +19,7 @@ Boss (main chat)  CEO + scrum master + release owner: plans, reviews, merges, re
    |-- Functional testers (use the running app as each user role)
    |-- Later: release engineer, data-quality team, architect
 ```
+When the backlog is wide, group the roles into departments (PMO, Product & Research, Engineering squads, QA, Security, DevOps & Release, Data, Support & Docs): `references/org-structure.md`.
 Path: `agent/<issue>-<slug>` -> pull request into `staging` -> verified batch -> release pull request -> `main`. Nobody pushes to `main`/`staging`, the Boss included.
 
 ## Two teams, one repository: found automatically (your friend, or your second Claude account)
@@ -69,6 +70,7 @@ Production is read-only for agents. Data change = encrypted backup, dry run, wri
 
 ## Reference files
 
+- `references/org-structure.md`: departments (PMO, Product & Research, Engineering squads, QA, Security, DevOps & Release, Data, Support & Docs), hats vs headcount, flow, cadence, RACI, lazy staffing.
 - `references/roles-and-briefs.md`: role definitions and copy-paste briefs.
 - `references/sdlc-and-sprints.md`: phases, gates, ceremonies, turn-taking, priorities, metrics, rollout order.
 - `references/safety-protocol.md`: data protocol, environments, backups, secrets, branch protection, migrations, hotfix.

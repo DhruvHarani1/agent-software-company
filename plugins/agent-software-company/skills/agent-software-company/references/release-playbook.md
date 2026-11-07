@@ -23,3 +23,7 @@ See safety-protocol.md: branch from production, pull request to production, then
 ## After the release
 
 Close the issues the pull requests fixed (a merge into the integration branch does not close them automatically). Delete merged branches. Update the standup board. Write the retro.
+
+## Before and after (v1.3)
+- Before the release PR: `git log main..staging` must list exactly what you intend (a PR stacked on another PR's branch may be missing), full suite green.
+- After: close the issues the merged PRs fixed, delete merged branches and worktrees, report counts (open PRs, open issues).
