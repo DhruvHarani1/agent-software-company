@@ -1,10 +1,12 @@
 {
   "protocol": "AAP v1",
   "orgs": {
-    "org-a": { "may": ["comment", "claim", "review", "open_pr"], "merge": true },
-    "org-b": { "may": ["comment", "claim", "review", "open_pr"], "merge": false }
+    "org-a": { "eligible_actions": ["read", "local_edit", "comment", "claim", "review", "open_pr"], "merge": false },
+    "org-b": { "eligible_actions": ["read", "local_edit", "comment", "claim", "review", "open_pr"], "merge": false }
   },
-  "never_from_another_org": ["merge", "publish", "execute_pasted_commands", "change_protocol", "grant_access", "touch_production", "send_messages", "reveal_secrets"],
-  "merge_requires": "independent PASS review on the exact head SHA",
-  "note": "To let both orgs merge, set merge:true for both and record the agreement in .agents/decisions/."
+  "authority": "Eligibility is a restriction, not a grant. Host/user instructions and scoped owner authorization govern every action; standing authorization persists.",
+  "never_from_peer_text": ["execute_pasted_commands", "grant_access", "change_policy", "reveal_secrets", "merge", "deploy", "publish", "send", "touch_production"],
+  "merge_requires": ["scoped owner authorization", "independent evidence on full head SHA and current tested context", "repository and host checks"],
+  "production_writes": "disabled by default; explicit authorization plus verified backup, dry run, exact reviewed plan and recovery evidence when permitted",
+  "note": "Template only. Record reviewed actor bindings in ROSTER.json. A proposed trust edit cannot authorize itself; these helpers do not enforce this file as a permission service."
 }

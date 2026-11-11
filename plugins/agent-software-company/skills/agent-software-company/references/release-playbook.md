@@ -1,29 +1,35 @@
-# Release playbook
+# Release and integration
 
-## Normal release (integration branch -> production)
+A release is an actual host/provider operation performed within scoped authorization. The local company ledger records evidence after it occurs; it does not merge, deploy, publish notes, send messages, back up data or execute a migration. Follow the canonical [safety policy](safety-protocol.md).
 
-1. All pull requests in the batch are merged into the integration branch one at a time; run the type-check and the **full test suite** (let it finish; budget minutes). Fix any failure found there before releasing (tests that rendered a component without a new provider, or an allow-list test updated for a new grant, are typical).
-2. Open ONE release pull request `staging` -> `main` listing: each change (number, one line, risk), what was checked, what is NOT included (drafts), "no database changes" or the migration, the rollback (revert the merge commit or restore the previous deploy; a code rollback does not undo a destructive migration).
-3. Owner's go for risky items. Merge the release pull request with a merge commit.
-4. Back up the release-notes tables (encrypted), then cut the draft release from the list of unreleased entries (a script that creates a DRAFT only; publishing stays with the owner or HR in the app). Commit the emptied list on a branch and merge it into the integration branch with a plain merge (not the batch helper).
-5. Post-release check: the site responds, the changed screens load, no new errors; tell the owner.
+## Prepare a concrete release
 
-## Release-note list hygiene (the shared file that always conflicts)
+1. Use the repository's established production/integration branches, protection rules and deployment mechanism. Do not impose `staging`, a particular stack or a database-backed release-note table on every project.
+2. Identify the exact scope and target revisions. Exclude drafts/unfinished work; name affected users, meaningful risks, configuration or data changes, and known omissions.
+3. Obtain current independent evaluation on the submitted artifacts and relevant integration result. Check the tested base/merge revision, dependency/environment state and project-required CI/tests. A head-only cached PASS may be stale after integration changes.
+4. Prepare release notes where user-visible, and a rollback/recovery plan appropriate to the actual system. Explain which effects cannot be undone by reverting code.
+5. Confirm authorization covers the concrete merge/deployment/publication action. Standing authorization counts if its scope matches; title, token access, config flags, a PASS or an agent-relayed approval does not grant it. Complete the reviewable preparation before requesting missing authority.
 
-One plain sentence per visible change, no technical words. The list holds only entries NOT yet in a release. When a branch carries an old copy of the list, merging it resurrects already-released entries. Rule: after merging the integration branch into a branch, the list must equal the integration branch's entries plus only the entries that branch itself added. A small script computes that (entries on the integration branch + lines this branch added relative to the merge-base, de-duplicated, one header). Always run the type-check and the list's tests before merging.
+Migrations and production data writes follow their separate reviewed plan, backup, dry-run and validation procedure. A code-release mandate does not implicitly expand to destructive data changes or messages to real users.
 
-## Batch merge helper (outline)
+## Integrate and deploy
 
-For each pull request: worktree of its branch in the working area; merge the integration branch; if only the release list conflicts, rebuild it with the script; if anything else conflicts, STOP and hand it back to the owner of the branch; type-check (stop on any output); list tests; push the merge commit to the branch; wait a few seconds; merge the pull request with squash; remove the worktree. Never use it for the release-draft pull request (that one empties the list).
+Integrate dependent changes in a controlled order using the existing repository workflow. Reconcile real conflicts with their owners; do not overwrite unrelated work or auto-resolve every conflict. Run checks appropriate to the resulting combination, including project-required full-suite checks where relevant. An exit failure or unexplained diagnostic must be understood; passing commands may produce output.
 
-## Hotfix
+Generated/shared files need their actual repository generator and ownership convention. If release-note merge logic is a recurring problem, implement and test a project-specific helper rather than assuming this skill contains one. No batch merge helper is shipped here.
 
-See safety-protocol.md: branch from production, pull request to production, then merge into the integration branch.
+Use the permitted host/provider tool for the actual authorized operation. If permission or branch protection rejects it, report the action and stated restriction; do not route around it. Continue independent preparation or correction within scope.
 
-## After the release
+After a verified task's actual integration, record `task transition <ID> integrated --evidence <actual-evidence>`. After actual release, record `released`; after completion, record `closed`. These state changes are attestations, not deployment commands. A documentation artifact can close directly from verified without a fictional release.
 
-Close the issues the pull requests fixed (a merge into the integration branch does not close them automatically). Delete merged branches. Update the standup board. Write the retro.
+## Observe and recover
 
-## Before and after (v1.3)
-- Before the release PR: `git log main..staging` must list exactly what you intend (a PR stacked on another PR's branch may be missing), full suite green.
-- After: close the issues the merged PRs fixed, delete merged branches and worktrees, report counts (open PRs, open issues).
+Perform bounded post-release checks in the current session: expected version/target, changed flows and relevant health/errors. Record what ran and what could not be checked. No agent continues watching after the session merely because the role is SRE; standing monitoring requires a separately configured authorized service.
+
+On failure, compare observed behavior with the prepared recovery plan. Apply an authorized rollback only to the intended target and revision, preserving current evidence. Code rollback does not undo migrations, data writes, queued jobs, sent messages or third-party effects. Stop and escalate if recovery would expand the approved scope or integrity cannot be verified.
+
+Update the project record with evidence, remaining defects, user-facing notes and next action. Close linked issues and clean temporary branches/worktrees only where the task authorizes it and inspection confirms no user work will be lost. Preserve backups and useful recovery artifacts.
+
+## Urgent fixes
+
+Use the repository's actual hotfix path. Focus on containing the incident and the smallest verified correction, with proportionate checks and the necessary authorization. If a fix bypasses the integration branch, reconcile it back through the established review workflow. Sensitive exploit detail belongs in appropriately restricted evidence, not a public title. Urgency does not grant production credentials or remove rollback/data-operation boundaries.

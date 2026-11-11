@@ -1,10 +1,9 @@
 {
   "protocol": "AAP v1",
   "areas": [
-    { "label": "area:money", "owner": "org-a", "paths": ["app/api/approval-action/**", "features/indents/**"] },
-    { "label": "area:docs", "owner": "org-b", "paths": ["docs/**"] },
-    { "label": "area:security", "owner": "org-a", "paths": [] }
+    { "label": "area:engineering", "owner": "org-a", "paths": ["src/**"] },
+    { "label": "area:docs", "owner": "org-b", "paths": ["docs/**"] }
   ],
-  "shared": ["features/whats-new/unreleased.ts", "package.json", "package-lock.json"],
-  "note": "Shared files belong to whoever holds the turn; announce it in your status comment."
+  "shared": [],
+  "note": "Examples only: replace paths with this repository's structure, list shared manifests/generated files explicitly, and coordinate before edits. Advisory ownership is not a lock or permission grant."
 }

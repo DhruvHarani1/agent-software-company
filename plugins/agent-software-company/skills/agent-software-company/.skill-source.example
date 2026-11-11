@@ -1,1 +1,5 @@
-{ "repo": "<owner>/agent-software-company", "path": ".", "branch": "main" }
+{
+  "repo": "DhruvHarani1/agent-software-company",
+  "path": "plugins/agent-software-company/skills/agent-software-company",
+  "branch": "main"
+}

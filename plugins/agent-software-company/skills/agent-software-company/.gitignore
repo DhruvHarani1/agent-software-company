@@ -1,0 +1,13 @@
+.agents-state/
+.agent-company/
+__pycache__/
+.skill-source
+*.bak
+*.new
+
+.publish-prep/
+dist/
+.env
+.env.*
+*.pyc
+.pytest_cache/

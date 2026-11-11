@@ -1,17 +1,18 @@
-# Token economy: get the same quality for far fewer tokens
+# Resource and context efficiency
 
-1. **Write once, read many.** Keep area notes (`docs/team/<area>.md`), the standup comment and decision files current. A new session reads those instead of replaying history or re-reading the codebase.
-2. **Fresh context for isolated work, fork only when the task depends on the conversation.** A fixer needs the issue, the plan and the files, not the Boss's whole chat.
-3. **Read diffs, not trees.** Reviewers read `gh pr diff` and the touched files, not the repository. Incremental review: if only one file changed since the last verdict, re-run only what it affects and say so (the verdict names the SHA).
-4. **Cache verdicts by SHA.** If the head SHA is the same as a previous PASS, do not re-run: link the verdict.
-5. **Right model for the role.** Read-only roles (inventory, route tables, listings, lint-type checks) can use a smaller, cheaper model; keep the strongest model for design, security reasoning and risky reviews.
-6. **Cap output.** Max findings per tester, max pull requests per manager per turn, tables instead of prose, counts instead of logs. Never paste long logs: attach the last 20 relevant lines and the counts.
-7. **Edit, do not repost.** Standups, claims renewals and status are ONE living comment edited each turn.
-8. **Batch questions.** One `decision-request` with options and a recommendation beats five round trips.
-9. **Avoid duplicate work.** Search issues and open pull requests before starting (`gh issue list --search`), claim before building, one owner per issue.
-10. **Do not poll.** One inbox read per turn; end the turn when waiting; the harness wakes you when a session finishes.
-11. **Run the cheap check first.** Type-check before the full suite, targeted tests before the full suite, full suite once per batch.
-12. **Terse mode** for all agent text (terse-mode.md): typically 40-70% fewer words.
-13. **Concurrency is a cost.** Two sessions at a time avoids both rate limits and slow machines; a usage limit stops every session at once.
-14. **Park, do not drag.** If a task is blocked for a decision, release the claim, write the handover, and take another task instead of idling in a long session.
-15. **Measure.** Each sprint record: pull requests per cost unit (sessions or tokens if visible), re-reviews caused by missing checks, duplicated work found. Fix the biggest waste first.
+Use less work when it preserves the same required evidence. Never trade away authorization boundaries, independent review, delivery reliability or necessary context to meet a token target.
+
+1. **Activate roles on demand.** A full company catalog does not require a running session per title. Combine compatible responsibilities for small tasks, while keeping evaluation independent where required. Respect host delegation/model rules and actual concurrency limits.
+2. **Delegate scoped artifacts.** Give a worker the task, acceptance criteria, constraints, relevant decisions and necessary files. Preserve history only when it changes the work; a role name alone is not a brief.
+3. **Keep durable handoffs.** Record branch/full SHA, tested context, checks, ownership, outstanding decisions and next action. Distinguish `.agent-company/` local state from GitHub's shared interop record; neither is automatically synchronized.
+4. **Read relevant evidence.** Start from the issue and diff, then inspect surrounding behavior and dependencies as needed. Do not forbid broader investigation when the change has wider implications.
+5. **Reuse evidence carefully.** Match head SHA, tested base/merge result, dependency state and relevant environment. Reassess affected checks after context changes. An unchanged head alone does not guarantee current integration evidence.
+6. **Choose checks by risk.** Run inexpensive relevant checks early; use regressions and integration coverage where justified. Documentation and low-impact reversible edits do not require artificial red proof. Evaluate commands by exit status and diagnostics, not whether they print output.
+7. **Check coordination at task boundaries.** Cache fresh observations when nothing relevant changes. Radar must not turn incomplete scans into an all-clear. Default inbox is peek; use `--ack` deliberately after successful output. Use replay for recovery rather than resetting state.
+8. **Keep event semantics intact.** Status is an editable snapshot. Claims, renewals, releases, reviews and handovers are new events; never edit claim history merely to reduce comment count.
+9. **Bound work.** Set useful scope, time/checkpoint and cost limits appropriate to the task. Budget estimates and measured token/cloud spending are different; report which is available. No fixed model, worker count, finding count or savings percentage applies universally.
+10. **Batch missing decisions.** Present independent questions together with recommendations, while continuing permitted work. Preserve standing authorization; do not ask again because a new agent or turn begins.
+11. **Wait through the runtime.** Use supported completion notifications or bounded waits for active work. Do not imply agents run continuously after a chat ends. Remote schedules/alerts require an explicitly configured service.
+12. **Measure outcomes.** Track useful completion, rework, repeated scans/checks, missed messages, blocked time, budget variance and recovery failures. Avoid optimizing for PR counts or raw tests added.
+
+When output needs to be brief, link complete evidence and state limitations. Do not hide a failed check, identity uncertainty, missing coverage or production effect to save tokens. See [interop](interop-protocol.md), [clear coordination](terse-mode.md) and the canonical [safety policy](safety-protocol.md).

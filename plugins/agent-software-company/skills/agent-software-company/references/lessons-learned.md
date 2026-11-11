@@ -1,4 +1,6 @@
-# Lessons learned (each one became a rule)
+# Historical lessons from the original project
+
+These incidents explain the original design; they are not universal requirements. Current authority comes from safety-protocol.md, with risk-based validation and on-demand company roles described in the operating references. Original fixed concurrency, universal red proof, product-specific release files and live-data assumptions below should be interpreted in that historical context.
 
 1. **Review catches what the author misses, but only if it is independent.** Two first versions of fixes were wrong (a stray file, a link fix that did not work for real links). The reviewer found them. Rule: no pull request is merged on its author's own checks.
 2. **A passing test proves nothing until it has failed.** Require the red proof: revert only the source files and watch the new tests fail for the right reason. A weak test (fails for the wrong reason) is rejected.
@@ -17,10 +19,3 @@
 15. **Keep the owner's decisions in the issue.** Business rules (who may see what, wording, limits) are the owner's, asked as a short question with a recommendation, and written into the issue so no agent re-asks.
 16. **Do not duplicate screens that already exist.** A summary repeated on the dashboard and its own page annoyed the users; replace it with a short card and a link.
 17. **Time-box and cap.** Max pull requests per manager per turn, max findings per tester, so reviewers keep up.
-18. **A pull request built on another PR's branch merges into that branch, not into the integration branch.** When the first PR is merged and its branch deleted, the second closes by itself. Always check the base branch before merging; compare `git log main..staging` before a release; open a fresh PR if one auto-closed.
-19. **Tests that depend on the real clock become time bombs.** Several tests failed on one date when a link-expiry cut-off passed. Pin the clock in any test touching a date rule.
-20. **Do not run the whole suite for every pull request.** Per PR: type-check plus tests related to the changed files (`vitest run --changed origin/staging`). Full suite once per release and nightly. Saves minutes per merge and agent turns.
-21. **Clean up after every merge, unprompted:** close the issues the PR fixed (comment "Fixed by #N"), delete the remote and local branches, remove the worktree (drop its `node_modules` link first), prune, report counts. The owner should never need to remind you.
-22. **A bulk data change is a class, not a list.** Tag or fix whole groups with one script: encrypted backup, dry run into a spreadsheet the owner can read, written plan, owner's word "approved", run, verify by counts, keep an audit line per row.
-23. **Honest error messages.** A catch-all "check your connection" told people the network was down when the server or a refresh callback failed. Separate a real network failure from other errors, report the others to the error log, and never blame the user's internet when the action may have succeeded.
-24. **Organise by departments when the backlog is wide** (see `org-structure.md`), but staff roles lazily: hats first, sessions only when a queue justifies it.

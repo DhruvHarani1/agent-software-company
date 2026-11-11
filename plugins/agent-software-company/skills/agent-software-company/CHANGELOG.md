@@ -1,5 +1,43 @@
 # Changelog
 
+## Native subagent edition 1.0.0 (11 Nov 2026)
+
+Separate self-contained edition under `editions/agent-software-company-subagents/`; the general edition remains version 2.0.0.
+
+- CEO-led product discovery and adaptive staffing inside one parent conversation, using real native subagents rather than user-operated staff chats. Outcome-only user requests; internal role/count selection, specialization, duplication and retirement.
+- Native attempt journal with pending slot/effort/path admission, actual identity binding, acknowledgments, logical versus physical parentage, immutable assignment/profile snapshots, observed lifecycle and stop/retry reconciliation.
+- Product evidence, reasoned organization decisions, versioned role definitions and role retirement/reactivation. Titles and recorded capabilities do not grant permissions or prove tool execution.
+- Guarded artifact/review settlement requires a matching completed native attempt; contributor history is preserved through failed binding, late launches and replacement. Completed blocked assignments have a narrow reconciled unblock path.
+- Offline lifecycle/CLI/bridge tests and a real isolated native builder-to-independent-review walkthrough. Direct parent dispatch exercised; nested runtime spawning remains host/capacity dependent and is covered by local admission fixtures.
+- Deterministic standalone ZIP packaging with an integrity manifest; excludes live state, credentials and caches. No automatic installation, background daemon or monetary telemetry.
+
+## 2.0.0 (11 Nov 2026)
+
+### First local company kernel
+
+- Added a catalog of 80 roles across 18 departments: executive leadership, product/research/design, architecture and engineering, data/AI/platform, independent review/QA/security, delivery/support/finance/growth/knowledge.
+- Added preview-first local initialization with founder/startup/full-company capacity presets and configurable abstract effort budget. The catalog is not a set of automatically running workers.
+- Added local projects/tasks, acceptance criteria, dependencies, declared path conflicts, actual host assignment records, effort reservations/accounting, decisions, status and Markdown reporting.
+- Added revision-bound submissions and independent review assignments with contributor exclusion. Full lowercase Git SHAs and SHA-256 artifact digests identify company submissions; evidence/session IDs remain operator attestations.
+- Added checkpoint, stopped-assignment park/resume and handoff with preserved phase, incurred cost and contributor history. The ledger does not spawn workers, run checks or perform external actions.
+
+### Coordination and recovery
+
+- Consolidated message parsing, timestamp/routing validation and bounded GitHub JSON/pagination reads. Invalid/unknown messages are ignored safely; style advice is non-blocking.
+- Radar now reports partial/unavailable coverage and unknown permissions rather than false empty results. Published PR-file coverage is checked against reported counts/API caps; unpushed/local branch work is outside scope. Hello output is draft only.
+- Claims now uses actual GitHub actors with owner-reviewed org bindings, explicit UNVERIFIED diagnostics, bounded leases and stable targeted claim IDs. Renewals/releases preserve actor ownership; stale takeover requires an explicit verified expired target. Expired reacquisition does not inherit old priority.
+- Inbox now defaults to full-body peek, supports explicit successful-output acknowledgment, replay and scoped repo/org/recipient state. Fetch boundaries, overlap and version deduplication protect concurrent arrivals and edited status messages; corrupt state is not silently reset.
+- Replaced update-in-place refetching with immutable reviewed candidates, complete added/modified/deleted summaries, source/path/link validation, local drift checks, preserved configuration/state, unique backups and rollback/interrupted-swap recovery.
+
+### Compatibility and policy
+
+- Major version: inbox acknowledgment defaults and updater apply interface deliberately change prior behavior. `pull` is fetch-only; legacy `pull --apply` is rejected. Review a named candidate and use its integrity digest to apply without refetching.
+- AAP header remains v1, with stricter full-SHA, lease, actor and event requirements. Update participating emitters together; older abbreviated/malformed messages may now be rejected.
+- Replaced conflicting action rules with one canonical safety policy. Roles/capabilities/evidence do not grant authority; scoped standing authorization persists. Checks are risk-based rather than universal test-first rituals.
+- Added operating model, command workflows, offline regression/fault fixtures and revised templates. The tested environment for this release is Windows; live provider behavior and other OS execution were not verified here.
+
+Advanced dashboards, persistent/background scheduling, automatic token/cloud telemetry, provider adapters, client-portfolio automation and autonomous external operations remain roadmap work.
+
 ## 1.4.0 (7 Nov 2026)
 - **Adaptive organisation:** `references/adaptive-org.md` (profile the project, presets for solo tool / internal app / public SaaS / library / mobile / data-ML / regulated, role catalog with the trigger for each role, e.g. marketing only for external products, Boss decision rights decide / inform / ask, monthly self-adjusting loop, decision log). New `scripts/org_profile.py` guesses the profile from the repo (read-only).
 - SKILL.md: designing the company is now the first step on any project; the skill is product-neutral.

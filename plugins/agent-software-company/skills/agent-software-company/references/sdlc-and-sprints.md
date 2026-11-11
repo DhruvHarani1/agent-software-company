@@ -1,49 +1,45 @@
-# SDLC, sprints and turn-taking
+# Delivery lifecycle and planning
 
-## Phases (every issue passes all of them)
+Use the smallest process that preserves scope, ownership, evidence and recovery. A sprint is optional; a documentation edit need not pass through every department or a release ceremony. Follow the [operating model](company-operating-model.md), [commands](company-workflows.md) and canonical [safety policy](safety-protocol.md).
 
-| # | Phase | Owner | Output | Gate |
-|---|---|---|---|---|
-| 1 | Requirements | Owner / Boss | Issue: why, who is affected, acceptance criteria in plain words | Ready: one problem, testable, decisions answered |
-| 2 | Design | Manager | Short plan in the issue: screens, rules, data, risk level | High risk: Boss approves; business rules: owner |
-| 3 | Build | Fixer | Branch, failing test first, then the fix | Red on old code, green on the fix, type-check clean |
-| 4 | Code review | QA + Boss | Verdict comment + risk review | PASS, role matrix checked, release note right |
-| 5 | Integration | Boss | Merge into the integration branch one at a time | Compiles; full suite green after a batch |
-| 6 | Functional test | Role testers | Walk changed flows as each role | No open defect |
-| 7 | Release | Boss | Release pull request, backup, draft notes | Owner's go for risky items; rollback note |
-| 8 | Operate | Boss / security | Post-release check, watch reports | No incident in the first day |
+## Gates by outcome
 
-**Definition of Done:** merged, tested, release note (if visible), area note updated, issue closed with the link, no temporary folders left.
+| Stage | Accountable function | Useful artifact / gate |
+|---|---|---|
+| Understand | Product/research or coordinator | Problem, affected users, constraints, acceptance, uncertainty. |
+| Design | Relevant engineering/design lead | Contracts and decisions sufficient for independent tasks; avoid speculative design. |
+| Build | Actual assigned worker | Scoped artifact, appropriate checks, revision/digest and limitations. |
+| Evaluate | Independent reviewer/QA; security when relevant | Requirements and behavior evaluated on exact submitted revision/context. |
+| Integrate | Delivery/platform owner | Authorized integration, current base/merge checks and conflict resolution. |
+| Release | Authorized release owner | Concrete release evidence, target, recovery and post-release checks. |
+| Learn | Accountable project owner | Outcome, defects, decisions and one supported process improvement. |
 
-## Sprint (about a week; agents work on request, so dates are the contract)
+Behavioral bug fixes generally need a meaningful regression demonstration. UI, access, data, performance and deployment changes need checks tied to their effects. Documentation, formatting and suitable refactors use proportionate validation. Do not create tests that merely mirror wording or manufacture red proof where it adds no confidence.
 
-- **Planning:** pick issues by value and risk, check dependencies, set the turn order, write "Sprint N plan" (goal in one sentence, committed list, stretch list, waits) with a milestone and due date.
-- **Daily standup:** each manager edits one comment on the standup issue at the start of their turn: Doing, Done, Blocked, Needs, Next. The Boss reads it before giving the next turn.
-- **Mid-sprint check:** re-order or drop.
-- **Review:** the release pull request is the demo (what shipped, what did not, proof).
-- **Retro:** a file `retro-sprint-N.md`: what went well, what hurt, one change; fold rule changes back into the docs.
-- **Cut-off is fixed.** Work not Done moves to the next sprint; never merge half-finished work to hit a date.
+A review covers the head and tested base/environment/dependencies, not an eternal PASS on the head alone. Reassess affected evidence when context changes. Isolate baseline experiments from dirty worktrees. Use actual exit status and diagnostics rather than treating any output as failure.
 
-## Turn-taking and work-in-progress limits
+## Plan and dispatch
 
-1. At most 2 sessions work at once: one builder + the QA reviewer. Testers and the security reviewer get their own turn.
-2. Dependencies decide the order. If A needs B's output, A pauses with label `blocked` and a standup note; B goes next; A resumes after B is merged.
-3. Shared files belong to whoever's turn it is.
-4. One batch in flight: finish and merge (or park) before starting a new one.
-5. Max 5 pull requests per manager per turn. Quality over count.
-6. If the machine is slow (merges taking minutes), reduce concurrency.
+Record projects with a goal and accountable owner; add tasks with role, acceptance, dependencies, literal owned paths and effort estimate. Agree shared contracts before parallel frontend/backend/design changes. Break a task down when it improves ownership or dependency clarity, not to maximize the number of roles.
 
-## Priorities
+`task queue` explains readiness, dependency, capacity and budget blockers. `task start` records an actual host assignment and reserves effort/capacity; it does not dispatch a worker. Default capacity is a preset choice, with actual host limits taking precedence. Managers coordinate non-conflicting work and preserve evaluator independence.
 
-P0 security hole / data loss / site down: hotfix the same day, straight to a release. P1 wrong money, wrong permission, blocks a daily job: this sprint. P2 wrong with a workaround: next planning. P3 polish.
+A generic dependency is satisfied at verified-or-later state. If a downstream task requires a deployed service or data operation, explicitly plan that requirement and record real delivery evidence; generic verification alone does not prove deployment. Path ownership checks apply to declared active build paths and are not atomic filesystem locks.
 
-## Metrics (report each sprint)
+## Blockers and interruptions
 
-Issues found vs confirmed; pull requests merged; first-pass approval rate; reopened bugs; lead time issue to release; abandoned pull requests; incidents caused by changes; tests added.
+A checkpoint preserves phase, actor, latest submission, paths and next action. Marking a blocker does not stop the real worker or release active resources. After confirming the worker stopped, park it and account incurred effort. Resume/handoff only after reconciling files, identities, evidence, budget and capacity; never reset contributor history to make review easier.
 
-## Rollout order for a new setup
+Keep ownership disputes visible. Continue unrelated permitted work while a decision is pending. Escalate with the two views, the consequence and a recommendation rather than sending every routine implementation choice to the owner.
 
-Step 0 safety foundation (test database, protected branches, backups rehearsed). Step 1 one manager only. Step 2 QA reviewer + release path rehearsed. Step 3 add managers one at a time. Step 4 security reviewer, functional testers. Step 5 data-quality and architecture teams. Step 6 scheduled runs only after a clean fortnight, starting read-only.
+## Optional sprint rhythm
 
-## Test routine (v1.3)
-Per pull request: type-check plus the tests related to the change (`vitest run --changed origin/staging`, or your runner's equivalent) and the whole test file of every touched file. Full suite once on the integration branch before each release, and nightly. Pin the clock in any test that touches a date rule.
+For a coherent batch, state a short goal, committed work, dependencies, checkpoint and cut-off. Update status when facts change. Demonstrate outcomes with evidence; unfinished work moves out of the batch rather than being relabeled done. Retrospectives should propose a narrow correction based on an observed failure, not accumulate universal rules.
+
+Useful priorities: P0 immediate incident/data exposure, P1 major wrong behavior or daily-job blockage, P2 workaround exists, P3 polish. Use the project's existing severity scheme if it is already established. Dates and costs are forecasts unless the owner explicitly makes a commitment.
+
+## Definition of completion
+
+Acceptance is met, appropriate independent evidence is recorded, actual integration/release is documented where required, limitations are visible, and ownership/next action is clear. Close a non-release artifact after verification; do not claim it shipped to production. Cleanup must preserve user changes and useful recovery artifacts.
+
+Report useful outcomes: confirmed defects, escaped/reopened issues, lead time, blocked time, evidence failures, duplicate work, resource variance and recovery incidents. The ledger currently stores some of this as operator evidence; it does not collect full telemetry automatically. PR counts, roles activated and tests added are not quality goals by themselves.

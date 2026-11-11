@@ -1,10 +1,19 @@
 {
   "name": "agent-software-company",
-  "version": "1.4.0",
-  "description": "Run a software product like a small company of Claude Code sessions: Boss, area managers, QA, security, testers; safe branches and data protocol; terse token-saving style; automatic discovery so several teams (or your second Claude account) can work on one GitHub repository.",
-  "author": { "name": "DhruvHarani1" },
+  "version": "2.0.0",
+  "description": "Coordinate software work as an IT company with executives, department managers, specialists, independent review, resource limits and durable handoffs.",
+  "author": {
+    "name": "DhruvHarani1"
+  },
   "homepage": "https://github.com/DhruvHarani1/agent-software-company",
   "repository": "https://github.com/DhruvHarani1/agent-software-company",
   "license": "MIT",
-  "keywords": ["agents", "multi-agent", "sdlc", "code-review", "workflow", "collaboration"]
+  "keywords": [
+    "agents",
+    "multi-agent",
+    "sdlc",
+    "code-review",
+    "workflow",
+    "collaboration"
+  ]
 }

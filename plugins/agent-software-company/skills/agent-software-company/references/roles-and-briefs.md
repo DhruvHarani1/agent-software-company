@@ -1,31 +1,59 @@
-# Roles and copy-paste briefs
+# Role briefs and responsibility
 
-Replace the angle brackets. Every brief is self-contained: a new session has not seen your conversation.
+Read the relevant card with `python <SKILL_DIR>/scripts/company.py --workspace <PROJECT_DIR> org --role <role-id>`. The catalog defines responsibilities and reporting lines. Use [operating model](company-operating-model.md) for departments and [safety policy](safety-protocol.md) for actual authority. Load only the role guidance needed for the current task.
 
-## Common block (put at the start of every brief)
+## Common assignment contract
 
-> Read docs/SDLC.md, docs/AGENT_RULES.md, docs/COORDINATION.md and CLAUDE.md first. Nobody pushes to `main` or `staging`; pull requests target `staging`; one concern per pull request; every fix has a regression test that fails on the old code and passes on the fix; run the type-check and the WHOLE existing test file of every file you touch; permission, money, date and sync changes are DRAFT pull requests; you NEVER touch production: only the test environment file, never the real env file, no e-mail, no cloud APIs, no migrations (describe them in the issue); temporary folders only under <WORKDIR>\wt\<name> and deleted when the pull request is merged or closed.
+Every actual worker receives:
 
-## Manager (area owner)
+- The goal and task ID, relevant decisions and constraints, observable acceptance criteria, and explicit exclusions.
+- Necessary source/artifacts, dependencies and agreed API/design/data contracts.
+- Owned literal paths, current branch/revision, environment identity and allowed tools/actions.
+- Effort/time checkpoint, evidence expectations, handoff recipient and escalation path.
 
-> You are <NAME>, manager of <AREA> reporting to the Boss. Your area owns: <paths and labels>. Backlog: `gh issue list --label area:<x>`. Decisions already made by the owner: <list>. 1) Triage: read every issue, check the code, remove duplicates, rank by risk x value, post the ranking in a new issue "<Area> backlog". Keep ONE comment on the standup issue, edited every run. 2) Spawn sub-agents as you judge: a fixer per issue (own branch `agent/<issue>-<slug>`), an independent reviewer who re-runs the red proof and checks allowed and forbidden roles, optionally a tester doing read-only code review for new bugs (file issues with `agent-found` + your area label). Max 5 pull requests per turn; start with the clearest low-risk ones. 3) You never merge. Anything the owner must decide: a short question with your recommendation. 4) Write docs/team/<area>.md (what the area does, traps, decisions). FINAL REPORT: Changed (PR links, tests, risk), Found not fixed, Tried and failed, Proposals with a recommendation, Decisions needed, Access lacked, Not touched, plus numbers.
+Record the real host identity; do not fabricate sessions. A role title grants no capability or owner permission. Preserve existing standing authorization and report the concrete boundary if new authority is missing. Workers return artifacts/evidence, limitations, blockers and next action; they do not merely say done.
 
-## Fixer (sub-agent)
+## Leadership
 
-> Fix issue #<N> only. Branch `agent/<N>-<slug>` from `origin/staging`. Write the failing test first and run it to prove it fails on the current code; make the smallest fix; prove it passes; run the type-check and the whole existing test files of everything you touched. Release-note list: only YOUR one plain sentence, only if a person sees a difference. Permission/money/date changes: DRAFT pull request, say who is affected. Open ONE pull request into `staging` with `Closes #N`, the red/green output in the body and the risks. If the right rule is unclear: comment on the issue, label `needs-boss`, stop.
+| Role | Assignment focus | Decision/output |
+|---|---|---|
+| CEO | Translate owner mandate into prioritized outcomes; resolve portfolio trade-offs. | Charter, priorities, concise owner briefing. |
+| MD/COO | Assign accountable delivery owners, manage capacity and dependencies. | Operating plan, blocker resolution, delivery forecast. |
+| CTO | Technical direction, contracts, engineering risk and capability. | Architecture decisions and technical roadmap. |
+| CPO | User problem, scope, acceptance and product trade-offs. | Product brief and requirements. |
+| CFO/FinOps | Estimates, reservations, incurred effort, budget variance. | Cost/resource recommendation; unknown currency is reported honestly. |
+| Quality Director | Independent evaluation strategy and delivery readiness. | Evidence-based readiness assessment. |
+| CISO | Confirm security/privacy risk and safe evaluation scope. | Threat assessment and prioritized findings. |
+| Growth Director | Sourced opportunity/commercial work. | Draft proposal, positioning and launch plan. |
 
-## QA reviewer (independent review desk)
+For a small task, combine compatible leadership responsibilities in the coordinator. Do not create executive meetings or approval chains solely to resemble a large company.
 
-> For each listed pull request: read the diff; in a short-lived worktree of its head branch run the type-check and the WHOLE test files of every touched source file plus the new tests; RED PROOF: revert only the non-test source files to the integration-branch version and confirm the new tests fail for the right reason, then restore; check one concern only, release-note list hygiene, role matrix (allowed AND forbidden), no secrets, no migration, no unrelated change. Post ONE comment `REVIEW:` PASS or CHANGES REQUESTED with commands, counts, red-proof result and each problem as file:line. Never approve or merge. Final message: a table PR / verdict / tests / red proof / risks / merge-order notes.
+## Department manager / delivery lead brief
 
-## Security reviewer (read-only)
+> Own the named outcome within the owner's mandate. Inspect current project state and existing conventions. Decompose only as much as dependencies and independent evaluation require. Give each task acceptance criteria, a role, paths, dependencies and an effort estimate. Use available actual host workers within capacity; `company.py` records assignments but does not spawn them. Agree contracts before parallel changes. Reconcile blockers and report changed scope, risks and missing decisions. Escalate unresolved cross-department conflicts with both views and a recommendation.
 
-> Review the integration branch for AUTHORIZATION and DATA-SAFETY. 1) Table of every API route: method, who may call it, what it reads/writes, service-role use. 2) For every route that takes an id, table name, e-mail or role from the request: look for gates that compare a raw string while the code later normalises it (case, whitespace, suffixes, aliases), insecure direct object references, missing role or site filters on reads, mass assignment, trust in client-supplied identity, loose token/cron-secret checks, upload and download path handling, e-mail approval links (binding, replay, expiry), debug or impersonation routes in production, rate limits, error text that leaks data. 3) Secrets hygiene in tracked files, headers/CORS, dependency advisories (summary only), database table access (RLS / revoked grants for every table). 4) One issue per CONFIRMED finding with labels `area:security`, `agent-found`, `P0..P3`, a neutral title WITHOUT exploit steps, body with file:line, who is affected, plain-words impact, confidence, fix idea (do not write the fix). Message the Boss at once for a P0. You write no code, push nothing, test nothing live.
+Managers own standards/capability within departments; delivery leads own the integrated project result. Name one accountable owner rather than creating two competing chains of command.
 
-## Functional tester
+## Research / product / design brief
 
-> Use the running app on the LOCAL staging server (test database, outside connections off) as each role, one role at a time, finishing each write-up before the next: submit, approve, send back, search, filters, mobile width and desktop, wrong or empty input, what a role must NOT see or do. For each defect: exact steps, expected vs actual, screenshot path under <WORKDIR>\reports\testers\<role>\. Check for duplicates first. One issue per confirmed defect with `agent-found`, an `area:` label and `P0..P3`. Summary table at the end: role / flows tried / defects / not tested. You write no product code.
+> Answer the scoped question or design the agreed flow. Identify existing evidence, sources, uncertainty, alternatives and the recommendation. Produce a contract or acceptance criteria that engineering can use. Do not fabricate interviews, customer feedback, market data or experiment results. Use current primary sources when the question requires verification; actual tool access and authorization still apply.
 
-## Boss (the main chat) duties
+## Builder brief
 
-Sprint plan and turn order; read the standup board before each turn; send briefs; review every pull request (risk, who is affected, money, dates, permissions, sync); merge into the integration branch one at a time; full suite after a batch; releases; explain decisions to the owner in plain language, decisions first; keep a short note of everything done that is not in git.
+> Implement the task's acceptance criteria only. Inspect dependencies and owned paths before starting. Make the smallest coherent change and run checks appropriate to its behavior/risk and project conventions. Behavioral fixes generally need meaningful regression evidence; documentation and low-impact edits need suitable validation. Record the full lowercase Git SHA or actual SHA-256 artifact digest, artifact location, check commands/results and limitations. Do not alter unrelated work, production data or external systems to satisfy a task.
+
+A worker submits evidence; the ledger does not inspect files or run those checks. Type-checking, migrations, UI tests and full-suite checks apply where the actual project/change requires them.
+
+## Independent reviewer / QA brief
+
+> Review the requirement and latest submitted artifact, then correctness, maintainability and relevant security implications. Independently evaluate the evidence on the exact submission and tested base/environment. Use an isolated worktree for baseline experiments; never revert a user's dirty worktree. For regression proof, fail for the expected behavior rather than missing dependencies. Check allowed/forbidden roles when access behavior is affected. Report PASS or CHANGES with concrete evidence, skipped checks and remaining risk.
+
+The evaluator must be a real separate worker who did not contribute to the task. `review start` rejects recorded contributor IDs; it cannot authenticate a newly invented alias. A new submission requires a new review against that submission. PASS is evidence, not merge/release permission.
+
+## Platform / security / support brief
+
+> Work in the explicitly identified environment and authorized scope. Prepare reproducible configuration, findings, checks or recovery plans. Do not test live vulnerabilities, send real messages, deploy or migrate production merely because the role usually performs that function. Confirm defects and preserve evidence with sensitive details handled appropriately. Support reproductions become scoped delivery tasks rather than hidden code/data changes.
+
+## Handoff report
+
+Include task/phase, actual actor, branch/full revision or artifact digest, changed paths, dependency/contracts status, commands/results, outstanding side effects, blockers and next action. Checkpoint before a long interruption; park only after confirming work stopped. A replacement worker reconciles files and state before handoff/resume. See [command workflows](company-workflows.md).

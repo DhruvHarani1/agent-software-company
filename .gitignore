@@ -3,3 +3,11 @@ __pycache__/
 .skill-source
 *.bak
 *.new
+
+.publish-prep/
+dist/
+.agent-company/
+.env
+.env.*
+.pytest_cache/
+*.pyc

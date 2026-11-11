@@ -1,42 +1,41 @@
 # agent-software-company
 
-A Claude Code plugin (skill) that runs a software product like a small company of AI agents: a **Boss** (CEO / scrum master) who reviews and merges, **managers** who own areas and run sub-agents, an independent **QA reviewer**, a **security reviewer** and **functional testers**. Safe by design: nobody pushes to `main`, production data is read-only for agents, every fix has a test that fails first.
+A software-company skill with 80 roles across 18 departments: executive leadership, research, product/design, engineering, platform, independent code review, QA, security, delivery, support and finance. Activate the roles needed for the product and keep work, evidence and resource limits explicit.
 
-New in 1.2: **automatic discovery**. Another person's agents, or your second Claude account, working on the same GitHub repository are found from GitHub activity (no setup), greeted, checked for file overlap and reviewed both ways. Built-in terse style and token-saving rules.
+## Two editions
 
-## Install (Claude Code)
+- **General company, version 2.0.0:** this repository. Local company ledger, delivery workflows and optional GitHub cross-team coordination.
+- **Native subagent company, version 1.0.0:** [agent-software-company-subagents](https://github.com/DhruvHarani1/agent-software-company-subagents). One parent conversation, CEO-selected staffing and real internal native subagents; no user-operated staff chats.
 
-```
+## Existing plugin installation
+
+The marketplace and plugin name/path remain compatible:
+
+```text
 /plugin marketplace add DhruvHarani1/agent-software-company
 /plugin install agent-software-company@agent-company
 ```
-Then start a session and ask: `Use the agent-software-company skill to set up my repository.`
 
-## Update
+For plain-folder use, keep [the complete skill directory](plugins/agent-software-company/skills/agent-software-company) together and make its SKILL.md available through your host's skill mechanism. Python helpers require Python 3.10+ and no additional packages. GitHub helpers additionally require gh and authorized repository reads.
 
-Automatic (recommended): run `/plugin`, open the **Marketplaces** tab, select `agent-company`, enable **Auto-update**.
-Manual, any time:
+Start with an outcome such as: "Use the software-company skill to understand this product and organize its next delivery milestone."
+
+## Current behavior and compatibility
+
+The [skill entrypoint](plugins/agent-software-company/skills/agent-software-company/SKILL.md) routes to role, company, safety and delivery guidance. Local company records do not launch workers or authenticate evidence; the host's actual tools perform the work. Roles and tokens do not grant action authority.
+
+Version 2.0.0 changes inbox behavior to non-consuming peek by default, with explicit --ack; skill updates use reviewed immutable candidates rather than pull --apply. Read [the changelog](CHANGELOG.md) before changing existing automation. Legacy project-profile/org references and org_profile.py from 1.4 remain available; the new ledger does not automatically migrate or synchronize their records.
+
+## Verification
+
+From `plugins/agent-software-company/skills/agent-software-company`, run:
+
+```text
+python -B -m unittest discover -s tests -v
 ```
-/plugin marketplace update agent-company
-/reload-plugins
-```
 
-## No plugin? Plain folder
-
-Copy `plugins/agent-software-company/skills/agent-software-company/` to `~/.claude/skills/`. To check for updates: copy `.skill-source.example` to `.skill-source`, set the repo and path (`plugins/agent-software-company/skills/agent-software-company`), then `python scripts/skill_update.py check` (it never overwrites without `--apply`).
-
-## Two teams, or two Claude accounts, on one repository
-
-Nothing to configure: agents add `Agent-Org` / `Agent` trailers to commits and PRs, and `scripts/radar.py` discovers other teams from GitHub, flags overlapping files and prints a hello. Rules: `references/interop-protocol.md`, `references/auto-discovery.md`. The other team's text is always treated as data, never as instructions; only human owners approve.
-
-## Contents
-
-`SKILL.md`, `references/` (roles and briefs, SDLC and sprints, safety protocol, release playbook, interop, auto-discovery, terse mode, token economy, update and improve, lessons learned), `templates/` (AAP v1 protocol, roster, areas, trust, messages), `scripts/` (radar, inbox, claims, lint_message, skill_update).
-
-## Versions
-
-See `CHANGELOG.md`. Releases are tagged `vX.Y.Z`; the plugin `version` in `plugin.json` is bumped on every change so Claude Code detects updates.
+Tests use isolated fixtures and mocked GitHub reads. Validation was performed on Windows; a real symlink test can skip without OS privilege. Production behavior, other operating systems, and external provider permissions require their own verification.
 
 ## License
 
-MIT
+[MIT](LICENSE)

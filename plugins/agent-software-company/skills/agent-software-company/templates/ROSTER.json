@@ -1,24 +1,26 @@
 {
   "protocol": "AAP v1",
+  "note": "Example identifiers only: replace owner logins and review bindings before using this as trusted configuration. github_logins lists additional actual GitHub actors allowed to emit this org's claims; it grants no action authorization.",
   "orgs": [
     {
       "org": "org-a",
-      "owner_github": "OWNER_LOGIN_A",
-      "role": "repository owner",
+      "owner_github": "example-owner-a",
+      "github_logins": [],
+      "role": "repository owner team",
       "agents": [
-        { "name": "boss-a", "role": "boss", "areas": ["*"] },
-        { "name": "manager-money-a", "role": "manager", "areas": ["area:money"] },
-        { "name": "qa-a", "role": "qa-reviewer", "areas": [] },
-        { "name": "security-a", "role": "security", "areas": ["area:security"] }
+        { "name": "ceo", "role": "ceo", "areas": ["*"] },
+        { "name": "engineering-manager", "role": "engineering-manager", "areas": ["area:engineering"] },
+        { "name": "qa", "role": "independent-reviewer", "areas": [] }
       ]
     },
     {
       "org": "org-b",
-      "owner_github": "OWNER_LOGIN_B",
-      "role": "collaborator",
+      "owner_github": "example-owner-b",
+      "github_logins": [],
+      "role": "collaborating team",
       "agents": [
-        { "name": "boss-b", "role": "boss", "areas": ["area:docs"] },
-        { "name": "qa-b", "role": "qa-reviewer", "areas": [] }
+        { "name": "docs-manager", "role": "manager", "areas": ["area:docs"] },
+        { "name": "qa", "role": "independent-reviewer", "areas": [] }
       ]
     }
   ]
